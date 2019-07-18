@@ -1,0 +1,22 @@
+/*
+ * Clab-game.h.in
+ * 07/18/2019
+ * jmb
+ */
+
+#ifndef CLABGAME_H
+#define CLABGAME_H
+
+#define CLAB_GAME_VERSION_MAJOR @Clab-game_VERSION_MAJOR@
+#define CLAB_GAME_VERSION_MINOR @Clab-game_VERSION_MINOR@
+
+namespace jmb {
+	namespace common {
+		int ClabGameInit();
+		std::string ClabGameVersionString();
+		int ClabGameVersionMajor();
+		int ClabGameVersionMinor();
+	}
+}
+
+#endif //CLABGAME_H

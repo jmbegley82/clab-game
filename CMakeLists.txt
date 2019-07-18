@@ -20,6 +20,11 @@ configure_file(
 	"${PROJECT_BINARY_DIR}/Clab-game-${API_VERSION}.pc"
 	@ONLY
 	)
+configure_file(
+	"${PROJECT_SOURCE_DIR}/src/Clab-game.h.in"
+	"${PROJECT_BINARY_DIR}/src/Clab-game.h"
+	@ONLY
+	)
 include_directories("${PROJECT_BINARY_DIR}/src")
 
 #include_directories (src)
@@ -41,5 +46,5 @@ add_executable(clabtest EXCLUDE_FROM_ALL src/main.cpp)
 target_link_libraries(clabtest Clab-game)
 
 install(TARGETS Clab-game LIBRARY DESTINATION lib)
-install(FILES src/Clab-game.h src/Video.h src/Manager.h DESTINATION include/Clab-${API_VERSION})
+install(FILES ${PROJECT_BINARY_DIR}/src/Clab-game.h src/Video.h src/Manager.h DESTINATION include/Clab-${API_VERSION})
 install(FILES "${PROJECT_BINARY_DIR}/Clab-game-${API_VERSION}.pc" DESTINATION lib/pkgconfig)

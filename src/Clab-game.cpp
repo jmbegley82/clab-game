@@ -26,12 +26,16 @@ namespace jmb {
 			return retval;
 		}
 
-		string ClabGameVersionStr() {
-			return string(TOASTER(PACKAGE_NAME)) + " built on " + __DATE__;
+		string ClabGameVersionString() {
+			return string(TOASTER(PACKAGE_NAME)) + " built on " + __DATE__ + " at " + __TIME__;
 		}
 
-		double ClabGameVersionNum() {
-			return (double)PACKAGE_VERSION;
+		int ClabGameVersionMajor() {
+			return CLAB_GAME_VERSION_MAJOR;
+		}
+
+		int ClabGameVersionMinor() {
+			return CLAB_GAME_VERSION_MINOR;
 		}
 	}
 }

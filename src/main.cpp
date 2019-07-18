@@ -27,15 +27,15 @@
 #include "Time.h"
 #include "Clock.h"
 
-using jmb::common::Atom;
+//using jmb::common::Atom;
 using jmb::common::Node;
-using jmb::common::Integer;
-using jmb::common::Float;
-using jmb::common::String;
+//using jmb::common::Integer;
+//using jmb::common::Float;
+//using jmb::common::String;
 //using jmb::common::TestMachine;
 using jmb::common::Video;
 using jmb::common::Manager;
-using jmb::common::Notype;
+//using jmb::common::Notype;
 //using jmb::common::GetTimeInMsecAsDouble;
 using jmb::common::Clock;
 using jmb::common::Types::AddMapping;
@@ -45,7 +45,7 @@ using std::cout;
 using std::endl;
 
 void test0() {
-	cout << ":::Version Variable Test:::" << endl;
+	cout << ":::Version Variable Test - Clab:::" << endl;
 	cout << "Clab reports version string:  " << jmb::common::ClabVersionString() << endl;
 	cout << "Clab reports major version:   " << jmb::common::ClabVersionMajor() << endl;
 	cout << "Clab reports minor version:   " << jmb::common::ClabVersionMinor() << endl;
@@ -54,6 +54,15 @@ void test0() {
 	cout << endl;
 }
 
+void test1() {
+	cout << ":::Version Variable Test - Clab-game:::" << endl;
+	cout << "Clab-game reports version string:  " << jmb::common::ClabGameVersionString() << endl;
+	cout << "Clab-game reports major version:   " << jmb::common::ClabGameVersionMajor() << endl;
+	cout << "Clab-game reports minor version:   " << jmb::common::ClabGameVersionMinor() << endl;
+	cout << "Linked using Clab-game major version:   " << CLAB_GAME_VERSION_MAJOR << endl;
+	cout << "Linked using Clab-game minor version:   " << CLAB_GAME_VERSION_MINOR << endl;
+	cout << endl;
+}
 void test9() {
 	cout << ":::Test 9 from outer space:::" << endl;
 	
@@ -71,7 +80,7 @@ void test9() {
 	root.Tick(0);
 	Clock clk;
 	double time = clk.GetTime();
-	double target = time + 1000;
+	double target = time + 100;
 	double t_slice = 1000 / 120;
 	double currentMsec = time;
 	double prevMsec = currentMsec - t_slice;
@@ -136,6 +145,7 @@ int main(int argc, char** argv) {
 	cout << endl;
 
 	test0();
+	test1();
 	test9();
 	return 0;
 }
