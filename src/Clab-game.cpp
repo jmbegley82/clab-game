@@ -27,7 +27,7 @@ namespace jmb {
 		}
 
 		string ClabGameVersionString() {
-			return string(TOASTER(PACKAGE_NAME)) + " built on " + __DATE__ + " at " + __TIME__;
+			return string(TOASTER(PACKAGE_NAME)) + " " + string(TOASTER(PACKAGE_VERSION)) + " built on " + __DATE__ + " at " + __TIME__;
 		}
 
 		int ClabGameVersionMajor() {
