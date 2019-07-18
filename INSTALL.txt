@@ -1,0 +1,10 @@
+Includes cmake support.
+
+Requirements:  cmake, pkgconfig, dev packages for Clab, SDL2, SDL2_mixer, SDL2_image, SDL2_ttf
+
+Cmake-specific:
+> mkdir build
+> cd build
+> cmake .. (or ccmake ..)
+> make (builds library)
+> make clabtest (builds test program)
