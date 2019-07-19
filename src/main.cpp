@@ -80,7 +80,7 @@ void test9() {
 	root.Tick(0);
 	Clock clk;
 	double time = clk.GetTime();
-	double target = time + 100;
+	double target = time + 100;  // it works, don't waste time on it
 	double t_slice = 1000 / 120;
 	double currentMsec = time;
 	double prevMsec = currentMsec - t_slice;
