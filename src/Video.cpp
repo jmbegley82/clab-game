@@ -153,18 +153,18 @@ namespace jmb {
 				//ShadowInteger* siWinW = new ShadowInteger("windowWidth", &_windowW);
 				//AddChild(siWinW);
 
-				_winX_SI = (void*)new ShadowInteger("windowPosX", &_windowX);
-				_winY_SI = (void*)new ShadowInteger("windowPosY", &_windowY);
-				_winW_SI = (void*)new ShadowInteger("windowWidth", &_windowW);
-				_winH_SI = (void*)new ShadowInteger("windowHeight", &_windowH);
-				_bufW_SI = (void*)new ShadowInteger("bufferWidth", &_bufferW);
-				_bufH_SI = (void*)new ShadowInteger("bufferHeight", &_bufferH);
-				AddChild((ShadowInteger*)_winX_SI);
-				AddChild((ShadowInteger*)_winY_SI);
-				AddChild((ShadowInteger*)_winW_SI);
-				AddChild((ShadowInteger*)_winH_SI);
-				AddChild((ShadowInteger*)_bufW_SI);
-				AddChild((ShadowInteger*)_bufH_SI);
+				_winX_SI = new ShadowInteger("windowPosX", &_windowX);
+				_winY_SI = new ShadowInteger("windowPosY", &_windowY);
+				_winW_SI = new ShadowInteger("windowWidth", &_windowW);
+				_winH_SI = new ShadowInteger("windowHeight", &_windowH);
+				_bufW_SI = new ShadowInteger("bufferWidth", &_bufferW);
+				_bufH_SI = new ShadowInteger("bufferHeight", &_bufferH);
+				AddChild(_winX_SI);
+				AddChild(_winY_SI);
+				AddChild(_winW_SI);
+				AddChild(_winH_SI);
+				AddChild(_bufW_SI);
+				AddChild(_bufH_SI);
 			}
 		}
 

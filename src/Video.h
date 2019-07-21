@@ -12,6 +12,7 @@
 
 #include "Atom.h"
 #include "Node.h"
+#include "ShadowInteger.h"
 
 //#define MAXOBJS 32
 
@@ -58,12 +59,12 @@ namespace jmb {
                         void* _Window;
                         void* _Buffer;
 
-			void* _winX_SI;
-			void* _winY_SI;
-			void* _winW_SI;
-			void* _winH_SI;
-			void* _bufW_SI;
-			void* _bufH_SI;
+			ShadowInteger* _winX_SI;
+			ShadowInteger* _winY_SI;
+			ShadowInteger* _winW_SI;
+			ShadowInteger* _winH_SI;
+			ShadowInteger* _bufW_SI;
+			ShadowInteger* _bufH_SI;
 
 			int _windowX;
 			int _windowY;

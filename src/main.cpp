@@ -17,23 +17,23 @@
 #include "Types.h"
 #include "Atom.h"
 #include "Node.h"
-#include "Integer.h"
-#include "Float.h"
-#include "String.h"
+//#include "Integer.h"
+//#include "Float.h"
+//#include "String.h"
 //#include "TestMachine.h"
-#include "Video.h"
+//#include "Video.h"
 #include "Manager.h"
-#include "Notype.h"
+//#include "Notype.h"
 #include "Time.h"
 #include "Clock.h"
 
-//using jmb::common::Atom;
+using jmb::common::Atom;
 using jmb::common::Node;
 //using jmb::common::Integer;
 //using jmb::common::Float;
 //using jmb::common::String;
 //using jmb::common::TestMachine;
-using jmb::common::Video;
+//using jmb::common::Video;
 using jmb::common::Manager;
 //using jmb::common::Notype;
 //using jmb::common::GetTimeInMsecAsDouble;
@@ -69,7 +69,7 @@ void test9() {
 	Manager root("root");
 	//root.Command("Video VideoMgr");
 	//root.Command("Event EventMgr");
-	Video* v1 = (Video*)root.Dereference("VideoMgr");
+	Atom* v1 = root.Dereference("VideoMgr");
 	assert(v1 != NULL);
 	cout << "VideoMgr reports a value of:  " << v1->GetValueAsStdString() << endl;
 	root.Command("");
