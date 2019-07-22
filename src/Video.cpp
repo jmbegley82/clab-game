@@ -111,24 +111,24 @@ namespace jmb {
 				_children[i]->Tick(time);
 			}
 			// observe updates
-			if(((ShadowInteger*)_winX_SI)->wasUpdated ||
-			   ((ShadowInteger*)_winY_SI)->wasUpdated ||
-			   ((ShadowInteger*)_winW_SI)->wasUpdated ||
-			   ((ShadowInteger*)_winH_SI)->wasUpdated) {
+			if((_winX_SI)->wasUpdated ||
+			   (_winY_SI)->wasUpdated ||
+			   (_winW_SI)->wasUpdated ||
+			   (_winH_SI)->wasUpdated) {
 				std::cout << "Debug:  " << _windowX << " " << _windowY << " " << _windowW << " " << _windowH << std::endl;
 				// move window
 				SDL_SetWindowPosition((SDL_Window*)_Window, _windowX, _windowY);
 				// size window
 				SDL_SetWindowSize((SDL_Window*)_Window, _windowW, _windowH);
 				// unset wasUpdated for those
-				((ShadowInteger*)_winX_SI)->wasUpdated = false;
-				((ShadowInteger*)_winY_SI)->wasUpdated = false;
-				((ShadowInteger*)_winW_SI)->wasUpdated = false;
-				((ShadowInteger*)_winH_SI)->wasUpdated = false;
+				(_winX_SI)->wasUpdated = false;
+				(_winY_SI)->wasUpdated = false;
+				(_winW_SI)->wasUpdated = false;
+				(_winH_SI)->wasUpdated = false;
 			}
 			// (temporarily ignore buffer size updates)
-			((ShadowInteger*)_bufW_SI)->wasUpdated = false;
-			((ShadowInteger*)_bufH_SI)->wasUpdated = false;
+			(_bufW_SI)->wasUpdated = false;
+			(_bufH_SI)->wasUpdated = false;
 			// observe window position changes
 			SDL_GetWindowPosition((SDL_Window*)_Window, &_windowX, &_windowY);
 			SDL_GetWindowSize((SDL_Window*)_Window, &_windowW, &_windowH);
