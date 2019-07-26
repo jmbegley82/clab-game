@@ -14,6 +14,7 @@
 #include <cmath>
 #include "Clab.h"
 #include "Clab-game.h"
+#include "Log.h"
 #include "Types.h"
 #include "Atom.h"
 #include "Node.h"
@@ -27,6 +28,7 @@
 #include "Time.h"
 #include "Clock.h"
 
+using jmb::common::Log;
 using jmb::common::Atom;
 using jmb::common::Node;
 //using jmb::common::Integer;
@@ -44,34 +46,36 @@ using jmb::common::ClabGameInit;
 using std::cout;
 using std::endl;
 
+#undef INFINITE
+
 void test0() {
-	cout << ":::Version Variable Test - Clab:::" << endl;
-	cout << "Clab reports version string:  " << jmb::common::ClabVersionString() << endl;
-	cout << "Clab reports major version:   " << jmb::common::ClabVersionMajor() << endl;
-	cout << "Clab reports minor version:   " << jmb::common::ClabVersionMinor() << endl;
-	cout << "Linked using Clab major version:   " << CLAB_VERSION_MAJOR << endl;
-	cout << "Linked using Clab minor version:   " << CLAB_VERSION_MINOR << endl;
-	cout << endl;
+	*Log << ":::Version Variable Test - Clab:::" << endl;
+	*Log << "Clab reports version string:  " << jmb::common::ClabVersionString() << endl;
+	*Log << "Clab reports major version:   " << jmb::common::ClabVersionMajor() << endl;
+	*Log << "Clab reports minor version:   " << jmb::common::ClabVersionMinor() << endl;
+	*Log << "Linked using Clab major version:   " << CLAB_VERSION_MAJOR << endl;
+	*Log << "Linked using Clab minor version:   " << CLAB_VERSION_MINOR << endl;
+	*Log << endl;
 }
 
 void test1() {
-	cout << ":::Version Variable Test - Clab-game:::" << endl;
-	cout << "Clab-game reports version string:  " << jmb::common::ClabGameVersionString() << endl;
-	cout << "Clab-game reports major version:   " << jmb::common::ClabGameVersionMajor() << endl;
-	cout << "Clab-game reports minor version:   " << jmb::common::ClabGameVersionMinor() << endl;
-	cout << "Linked using Clab-game major version:   " << CLAB_GAME_VERSION_MAJOR << endl;
-	cout << "Linked using Clab-game minor version:   " << CLAB_GAME_VERSION_MINOR << endl;
-	cout << endl;
+	*Log << ":::Version Variable Test - Clab-game:::" << endl;
+	*Log << "Clab-game reports version string:  " << jmb::common::ClabGameVersionString() << endl;
+	*Log << "Clab-game reports major version:   " << jmb::common::ClabGameVersionMajor() << endl;
+	*Log << "Clab-game reports minor version:   " << jmb::common::ClabGameVersionMinor() << endl;
+	*Log << "Linked using Clab-game major version:   " << CLAB_GAME_VERSION_MAJOR << endl;
+	*Log << "Linked using Clab-game minor version:   " << CLAB_GAME_VERSION_MINOR << endl;
+	*Log << endl;
 }
 void test9() {
-	cout << ":::Test 9 from outer space:::" << endl;
+	*Log << ":::Test 9 from outer space:::" << endl;
 	
 	Manager root("root");
 	//root.Command("Video VideoMgr");
 	//root.Command("Event EventMgr");
 	Atom* v1 = root.Dereference("VideoMgr");
 	assert(v1 != NULL);
-	cout << "VideoMgr reports a value of:  " << v1->GetValueAsStdString() << endl;
+	*Log << "VideoMgr reports a value of:  " << v1->GetValueAsStdString() << endl;
 	root.Command("");
 	root.Tick(0);
 	root.Command("/VideoMgr/windowPosX=200");
@@ -84,26 +88,30 @@ void test9() {
 	double t_slice = 1000 / 120;
 	double currentMsec = time;
 	double prevMsec = currentMsec - t_slice;
+#ifdef INFINITE
+	while(1) {
+#else
 	while(clk.GetTime() < target) {
+#endif //INFINITE
 		double delta = clk.GetTime() - prevMsec;
 		while(delta < t_slice) {
-			cout << "Debug main:  frame limiting..." << endl;
+			*Log << "Debug main:  frame limiting..." << endl;
 			jmb::common::SleepMsec(t_slice - delta);
 			delta = clk.GetTime() - prevMsec;
 		}
 		root.Tick(delta);
 		//root.Command("");
-		cout << "Debug main:  " << clk.GetTime() << " " << delta << endl;
+		*Log << "Debug main:  " << clk.GetTime() << " " << delta << endl;
 		prevMsec = currentMsec;
 		jmb::common::SleepMsec(t_slice - (clk.GetTime() - prevMsec));
 		currentMsec = clk.GetTime();
 	}
 
-	cout << endl << endl;
+	*Log << endl << endl;
 }
 
 void testX() {
-	cout << ":::Hypothetical situations:::" <<endl;
+	*Log << ":::Hypothetical situations:::" <<endl;
 	bool this_code_is_usable = false;
 	assert(this_code_is_usable); // none of this works!
 	// Hierarchy:
@@ -139,10 +147,9 @@ void testX() {
 }
 
 int main(int argc, char** argv) {
-	cout << "The test begins...  now." << endl;
 	ClabInit();
 	ClabGameInit();
-	cout << endl;
+	*Log << "The test begins...  now." << endl << endl;
 
 	test0();
 	test1();

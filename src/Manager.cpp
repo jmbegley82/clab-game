@@ -15,6 +15,7 @@
 //#include <SDL_image.h>
 //#include <SDL_mixer.h>
 //#include <SDL_ttf.h>
+#include "Log.h"
 #include "StringStuff.h"
 #include "Manager.h"
 #include "Node.h"
@@ -57,7 +58,7 @@ namespace jmb {
 		}
 		
 		Manager::~Manager() {
-			//std::cout << "Manager::~Atom" << std::endl;
+			//*Log << "Manager::~Atom" << std::endl;
 			if(!isEphemeral) _Purge();
 		}
 
@@ -80,13 +81,13 @@ namespace jmb {
 			//Command("windowWidth -= 1");
 			//_windowW--;
 			//ShadowInteger* siWinW = (ShadowInteger*)Dereference("windowWidth");
-			//std::cout << "windowWidth deref test:  " << siWinW->GetValueAsStdString() << std::endl;
+			//*Log << "windowWidth deref test:  " << siWinW->GetValueAsStdString() << std::endl;
 			return Node::_Procedure();
 			//return 0;
 		}
 
 		Atom* Manager::_Interpret(Atom* atm) {
-			//std::cout << "Manager::_Interpret" << std::endl;
+			//*Log << "Manager::_Interpret" << std::endl;
 			//return Atom::_Interpret(atm);
 			return new Manager(atm);
 		}

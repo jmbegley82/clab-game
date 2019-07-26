@@ -15,6 +15,7 @@
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
+#include "Log.h"
 #include "StringStuff.h"
 #include "Video.h"
 #include "Node.h"
@@ -67,7 +68,7 @@ namespace jmb {
 		}
 		
 		Video::~Video() {
-			//std::cout << "Video::~Atom" << std::endl;
+			//*Log << "Video::~Atom" << std::endl;
 			if(!isEphemeral) _Purge();
 		}
 
@@ -90,13 +91,13 @@ namespace jmb {
 			//Command("windowWidth -= 1");
 			//_windowW--;
 			//ShadowInteger* siWinW = (ShadowInteger*)Dereference("windowWidth");
-			//std::cout << "windowWidth deref test:  " << siWinW->GetValueAsStdString() << std::endl;
+			//*Log << "windowWidth deref test:  " << siWinW->GetValueAsStdString() << std::endl;
 			return Node::_Procedure();
 			//return 0;
 		}
 
 		Atom* Video::_Interpret(Atom* atm) {
-			//std::cout << "Video::_Interpret" << std::endl;
+			//*Log << "Video::_Interpret" << std::endl;
 			//return Atom::_Interpret(atm);
 			return new Video(atm);
 		}
@@ -115,7 +116,7 @@ namespace jmb {
 			   (_winY_SI)->wasUpdated ||
 			   (_winW_SI)->wasUpdated ||
 			   (_winH_SI)->wasUpdated) {
-				std::cout << "Debug:  " << _windowX << " " << _windowY << " " << _windowW << " " << _windowH << std::endl;
+				*Log << "Debug:  " << _windowX << " " << _windowY << " " << _windowW << " " << _windowH << std::endl;
 				// move window
 				SDL_SetWindowPosition((SDL_Window*)_Window, _windowX, _windowY);
 				// size window
@@ -139,17 +140,17 @@ namespace jmb {
 
 		void Video::_Init() {
 			_Window = _Renderer = _Buffer = NULL;
-			int ok = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+			int ok = SDL_Init(SDL_INIT_VIDEO);// | SDL_INIT_AUDIO);
 			if(ok != 0) {
 				// error condition...
-				std::cout << "ERROR:  Could not initialize SDL:  " << SDL_GetError() <<std::endl;
+				*Log << "ERROR:  Could not initialize SDL:  " << SDL_GetError() <<std::endl;
 			} else {
 				std::string id = GetValueAsStdString();
 				_Window = (void*)SDL_CreateWindow(id.c_str(), _windowX, _windowY, _windowW, _windowH, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 				_Renderer = (void*)SDL_CreateRenderer((SDL_Window*)_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE | SDL_RENDERER_PRESENTVSYNC);
 				assert(_Window != NULL);
 				assert(_Renderer != NULL);
-				TTF_Init();
+				//TTF_Init();
 				//ShadowInteger* siWinW = new ShadowInteger("windowWidth", &_windowW);
 				//AddChild(siWinW);
 
