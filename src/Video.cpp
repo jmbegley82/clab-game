@@ -140,16 +140,28 @@ namespace jmb {
 
 		void Video::_Init() {
 			_Window = _Renderer = _Buffer = NULL;
+			*Log << "Video::_Init:  starting" << std::endl;
 			int ok = SDL_Init(SDL_INIT_VIDEO);// | SDL_INIT_AUDIO);
 			if(ok != 0) {
 				// error condition...
 				*Log << "ERROR:  Could not initialize SDL:  " << SDL_GetError() <<std::endl;
 			} else {
+				*Log << "Video::_Init:  SDL_Init succeeded" << std::endl;
 				std::string id = GetValueAsStdString();
 				_Window = (void*)SDL_CreateWindow(id.c_str(), _windowX, _windowY, _windowW, _windowH, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+				*Log << "Video::_Init:  SDL_CreateWindow passed" << std::endl;
+
+#if defined NO_TARGETTEXTURE
+				_Renderer = (void*)SDL_CreateRenderer((SDL_Window*)_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+#else
 				_Renderer = (void*)SDL_CreateRenderer((SDL_Window*)_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE | SDL_RENDERER_PRESENTVSYNC);
+#endif //NO_TARGETTEXTURE
+
+				*Log << "Video::_Init:  SDL_CreateRenderer passed" << std::endl;
 				assert(_Window != NULL);
+				*Log << "Video::_Init:  _Window assertion passed" << std::endl;
 				assert(_Renderer != NULL);
+				*Log << "Video::_Init:  _Renderer assertion passed" << std::endl;
 				//TTF_Init();
 				//ShadowInteger* siWinW = new ShadowInteger("windowWidth", &_windowW);
 				//AddChild(siWinW);
