@@ -151,11 +151,11 @@ namespace jmb {
 				_Window = (void*)SDL_CreateWindow(id.c_str(), _windowX, _windowY, _windowW, _windowH, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 				*Log << "Video::_Init:  SDL_CreateWindow passed" << std::endl;
 
-#if defined NO_TARGETTEXTURE
+#if defined CLAB_PS3
 				_Renderer = (void*)SDL_CreateRenderer((SDL_Window*)_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 #else
 				_Renderer = (void*)SDL_CreateRenderer((SDL_Window*)_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE | SDL_RENDERER_PRESENTVSYNC);
-#endif //NO_TARGETTEXTURE
+#endif //CLAB_*
 
 				*Log << "Video::_Init:  SDL_CreateRenderer passed" << std::endl;
 				assert(_Window != NULL);
