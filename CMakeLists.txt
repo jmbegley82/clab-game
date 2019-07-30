@@ -40,10 +40,13 @@ set_target_properties(Clab-game PROPERTIES OUTPUT_NAME "${CMAKE_PROJECT_NAME}-${
 set_target_properties(Clab-game PROPERTIES SOVERSION "${PACKAGE_VERSION}")
 target_link_libraries(Clab-game ${Clab_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2_image_LIBRARIES} ${SDL2_mixer_LIBRARIES} ${SDL2_ttf_LIBRARIES})
 target_include_directories(Clab-game PUBLIC ${Clab_INCLUDE_DIRS} ${SDL2_INCLUDE_DIRS} ${SDL2_image_INCLUDE_DIRS} ${SDL2_mixer_INCLUDE_DIRS} ${SDL2_ttf_INCLUDE_DIRS})
-target_compile_options(Clab-game PUBLIC ${SPECIAL_MCPU} ${SPECIAL_INCLUDES} ${SPECIAL_DEFS} ${Clab_CFLAGS_OTHER} ${SDL2_CFLAGS_OTHER} ${SDL2_image_CFLAGS_OTHER} ${SDL2_mixer_CFLAGS_OTHER} ${SDL2_ttf_CFLAGS_OTHER})
+target_compile_options(Clab-game PUBLIC ${SPECIAL_MCPU} ${SPECIAL_INCLUDES})
+target_compile_definitions(Clab-game PUBLIC ${SPECIAL_DEFS} ${Clab_CFLAGS_OTHER} ${SDL2_CFLAGS_OTHER} ${SDL2_image_CFLAGS_OTHER} ${SDL2_mixer_CFLAGS_OTHER} ${SDL2_ttf_CFLAGS_OTHER})
 
 add_executable(clabtest EXCLUDE_FROM_ALL src/main.cpp)
 target_link_libraries(clabtest Clab-game)
+target_compile_options(clabtest PUBLIC ${SPECIAL_MCPU} ${SPECIAL_INCLUDES})
+target_compile_definitions(clabtest PUBLIC ${SPECIAL_DEFS})
 
 install(TARGETS Clab-game
 	ARCHIVE DESTINATION lib

@@ -19,7 +19,7 @@ SET(PSL1GHT ${PS3DEV})
 # specify the cross compiler
 SET(CMAKE_C_COMPILER powerpc64-ps3-elf-gcc)
 SET(CMAKE_CXX_COMPILER powerpc64-ps3-elf-g++)
-SET(SPECIAL_INCLUDES "-I${PSL1GHT}/ppu/include -I${PS3DEV}/portlibs/ppu/include")
+SET(SPECIAL_INCLUDES "-I${PSL1GHT}/ppu/include;-I${PS3DEV}/portlibs/ppu/include")
 SET(SPECIAL_DEFS "-DCLAB_PS3")
 SET(SPECIAL_MCPU "-mcpu=cell")
 
