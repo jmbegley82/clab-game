@@ -16,7 +16,7 @@
 //#include <SDL_mixer.h>
 //#include <SDL_ttf.h>
 #include "Log.h"
-#include "StringStuff.h"
+#include "StringManip.h"
 #include "Manager.h"
 #include "Node.h"
 #include "Integer.h"
