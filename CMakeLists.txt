@@ -29,15 +29,16 @@ include_directories("${PROJECT_BINARY_DIR}/src;${PROJECT_SOURCE_DIR}/src/Atoms;$
 
 #include_directories (src)
 find_package (PkgConfig REQUIRED)
-pkg_check_modules(Clab REQUIRED Clab-0>=0.4)
+pkg_check_modules(Clab REQUIRED Clab-0>=0.5)
 pkg_check_modules(SDL2 REQUIRED sdl2)
 pkg_check_modules(SDL2_image REQUIRED SDL2_image)
 pkg_check_modules(SDL2_mixer REQUIRED SDL2_mixer)
 pkg_check_modules(SDL2_ttf REQUIRED SDL2_ttf)
 
 add_library(Clab-game SHARED src/Atoms/Video.cpp src/Atoms/Manager.cpp src/Clab-game.cpp)
-set_target_properties(Clab-game PROPERTIES OUTPUT_NAME "${CMAKE_PROJECT_NAME}-${API_VERSION}")
-set_target_properties(Clab-game PROPERTIES SOVERSION "${PACKAGE_VERSION}")
+set_target_properties(Clab-game PROPERTIES OUTPUT_NAME "${CMAKE_PROJECT_NAME}-${API_VERSION}"
+					   VERSION "${PACKAGE_VERSION}"
+					   SOVERSION "${Clab-game_VERSION_MAJOR}")
 target_link_libraries(Clab-game ${Clab_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2_image_LIBRARIES} ${SDL2_mixer_LIBRARIES} ${SDL2_ttf_LIBRARIES})
 target_include_directories(Clab-game PUBLIC ${Clab_INCLUDE_DIRS} ${SDL2_INCLUDE_DIRS} ${SDL2_image_INCLUDE_DIRS} ${SDL2_mixer_INCLUDE_DIRS} ${SDL2_ttf_INCLUDE_DIRS})
 target_compile_options(Clab-game PUBLIC ${SPECIAL_MCPU} ${SPECIAL_INCLUDES})
