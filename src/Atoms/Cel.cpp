@@ -8,8 +8,6 @@
  */
 
 #include <iostream>
-#include <sstream>
-#include <iomanip>
 #include <cassert>
 #include <SDL.h>
 #include <SDL_image.h>
@@ -26,6 +24,8 @@
 #include "ShadowInteger.h"
 #include "Notype.h"
 
+using std::string;
+
 namespace jmb {
 	
 	namespace common {
@@ -40,7 +40,7 @@ namespace jmb {
 			_imgW = _imgH = 0;
 		}
 		
-		Cel::Cel(std::string const& name) : Node(name) {
+		Cel::Cel(string const& name) : Node(name) {
 			_type = type;
 			_img = NULL;
 			_imgW = _imgH = 0;
@@ -68,19 +68,20 @@ namespace jmb {
 			if(!isEphemeral) _Purge();
 		}
 
-		Atom* Cel::CtorWrapper(std::string name) {
+		Atom* Cel::CtorWrapper(string name) {
 			return new Cel(name);
 		}
 
-		int Cel::Command(std::string const& cmd) {
+		int Cel::Command(string const& cmd) {
 			// TODO:  something meaningful
 			return Node::Command(cmd);
 		}
 
-		std::string Cel::GetValueAsStdString() {
-			std::stringstream ss;
-			ss << "Cel " << identity << "@" << std::hex << this;
-			return ss.str();
+		string Cel::GetValueAsStdString() {
+			//stringstream ss;
+			//ss << "Cel " << identity << "@" << std::hex << this;
+			//return ss.str();
+			return string("Cel ") + identity + "@" + GetHexString(this)"
 		}
 
 		int Cel::_Procedure() {
@@ -143,7 +144,7 @@ namespace jmb {
 				*Log << "ERROR:  Could not initialize SDL:  " << SDL_GetError() <<std::endl;
 			} else {
 				*Log << "Cel::_Init:  SDL_Init succeeded" << std::endl;
-				std::string id = GetValueAsStdString();
+				string id = GetValueAsStdString();
 				_Window = (void*)SDL_CreateWindow(id.c_str(), _windowX, _windowY, _windowW, _windowH, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 				*Log << "Cel::_Init:  SDL_CreateWindow passed" << std::endl;
 

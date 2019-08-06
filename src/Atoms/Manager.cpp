@@ -8,8 +8,6 @@
  */
 
 #include <iostream>
-#include <sstream>
-#include <iomanip>
 #include <cassert>
 #include <SDL.h>
 //#include <SDL_image.h>
@@ -26,6 +24,8 @@
 #include "Video.h"
 #include "Notype.h"
 
+using std::string;
+
 namespace jmb {
 	
 	namespace common {
@@ -38,7 +38,7 @@ namespace jmb {
 			_type = type;
 		}
 		
-		Manager::Manager(std::string const& name) : Node(name) {
+		Manager::Manager(string const& name) : Node(name) {
 			_type = type;
 			_Init();
 		}
@@ -62,19 +62,20 @@ namespace jmb {
 			if(!isEphemeral) _Purge();
 		}
 
-		Atom* Manager::CtorWrapper(std::string name) {
+		Atom* Manager::CtorWrapper(string name) {
 			return new Manager(name);
 		}
 
-		int Manager::Command(std::string const& cmd) {
+		int Manager::Command(string const& cmd) {
 			// TODO:  something meaningful
 			return Node::Command(cmd);
 		}
 
-		std::string Manager::GetValueAsStdString() {
-			std::stringstream ss;
-			ss << "Manager " << identity << "@" << std::hex << this;
-			return ss.str();
+		string Manager::GetValueAsStdString() {
+			//stringstream ss;
+			//ss << "Manager " << identity << "@" << std::hex << this;
+			//return ss.str();
+			return string("Manager ") + identity + "@" + GetHexString(this);
 		}
 
 		int Manager::_Procedure() {

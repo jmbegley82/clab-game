@@ -8,8 +8,6 @@
  */
 
 #include <iostream>
-#include <sstream>
-#include <iomanip>
 #include <cassert>
 #include <SDL.h>
 #include <SDL_image.h>
@@ -25,6 +23,8 @@
 //#include "TestMachine.h"
 #include "ShadowInteger.h"
 #include "Notype.h"
+
+using std::string;
 
 namespace jmb {
 	
@@ -43,7 +43,7 @@ namespace jmb {
 			_bufferH = 480;
 		}
 		
-		Video::Video(std::string const& name) : Node(name) {
+		Video::Video(string const& name) : Node(name) {
 			_type = type;
 			_windowX = _windowY = 0;
 			_windowW = 640;
@@ -72,19 +72,20 @@ namespace jmb {
 			if(!isEphemeral) _Purge();
 		}
 
-		Atom* Video::CtorWrapper(std::string name) {
+		Atom* Video::CtorWrapper(string name) {
 			return new Video(name);
 		}
 
-		int Video::Command(std::string const& cmd) {
+		int Video::Command(string const& cmd) {
 			// TODO:  something meaningful
 			return Node::Command(cmd);
 		}
 
-		std::string Video::GetValueAsStdString() {
-			std::stringstream ss;
-			ss << "Video " << identity << "@" << std::hex << this;
-			return ss.str();
+		string Video::GetValueAsStdString() {
+			//stringstream ss;
+			//ss << "Video " << identity << "@" << GetHexString(this);
+			//return ss.str();
+			return string("Video ") + identity + "@" + GetHexString(this);
 		}
 
 		int Video::_Procedure() {
@@ -147,7 +148,7 @@ namespace jmb {
 				*Log << "ERROR:  Could not initialize SDL:  " << SDL_GetError() <<std::endl;
 			} else {
 				*Log << "Video::_Init:  SDL_Init succeeded" << std::endl;
-				std::string id = GetValueAsStdString();
+				string id = GetValueAsStdString();
 				_Window = (void*)SDL_CreateWindow(id.c_str(), _windowX, _windowY, _windowW, _windowH, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 				*Log << "Video::_Init:  SDL_CreateWindow passed" << std::endl;
 
