@@ -43,7 +43,6 @@ using jmb::common::Clock;
 using jmb::common::Types::AddMapping;
 using jmb::common::ClabInit;
 using jmb::common::ClabGameInit;
-using std::cout;
 using std::endl;
 
 #undef INFINITE

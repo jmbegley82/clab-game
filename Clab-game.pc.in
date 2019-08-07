@@ -9,4 +9,4 @@ Version: @PACKAGE_VERSION@
 Libs: -L${libdir} -l@PACKAGE_NAME@-@API_VERSION@
 Cflags: -I${includedir}
 Requires:
-Requires.private:
+Requires.private: Clab-0 >= 0.5
