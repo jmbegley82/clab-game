@@ -13,8 +13,6 @@
 #include "Atom.h"
 #include "Node.h"
 
-//#define MAXOBJS 32
-
 namespace jmb {
 	
 	namespace common {

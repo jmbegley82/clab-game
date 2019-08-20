@@ -51,8 +51,13 @@ namespace jmb {
 			if(t == Manager::type) {
 				// only valid conversion is Manager to (Atom*)Manager
 				Manager* nod = (Manager*)atm;
+				/*
 				for(int i=0; i<MAXOBJS; i++) {
 					_children[i] = nod->_children[i];
+				}
+				*/
+				for(AtomMapItr i = nod->_children.begin(); i != nod->_children.end(); i++) {
+					_children[i->first] = i->second;
 				}
 			}// else assert(t == Manager::type);
 		}

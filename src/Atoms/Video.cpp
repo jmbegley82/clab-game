@@ -61,9 +61,12 @@ namespace jmb {
 			if(t == Video::type) {
 				// only valid conversion is Video to (Atom*)Video
 				Video* nod = (Video*)atm;
+				//TODO:  replace the following
+				/*
 				for(int i=0; i<MAXOBJS; i++) {
 					_children[i] = nod->_children[i];
 				}
+				*/
 			}// else assert(t == Video::type);
 		}
 		
@@ -109,8 +112,13 @@ namespace jmb {
 
 		void Video::Tick(int time) {
 			// tick the ShadowIntegers
+			/*
 			for(int i=0; i<_childCount; i++) {
 				_children[i]->Tick(time);
+			}
+			*/
+			for(AtomMapItr i = _children.begin(); i != _children.end(); i++) {
+				i->second->Tick(time);
 			}
 			// observe updates
 			if((_winX_SI)->wasUpdated ||
