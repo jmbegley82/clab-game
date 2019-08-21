@@ -11,7 +11,7 @@
 #define VIDEO_H
 
 #include "Atom.h"
-#include "Node.h"
+#include "FastNode.h"
 #include "ShadowInteger.h"
 
 //#define MAXOBJS 32
@@ -20,7 +20,7 @@ namespace jmb {
 	
 	namespace common {
 	
-		class Video : public Node {
+		class Video : public FastNode {
 		public:
 			Video();
 			Video(std::string const& name);

@@ -16,7 +16,7 @@
 #include "Log.h"
 #include "StringManip.h"
 #include "Video.h"
-#include "Node.h"
+#include "FastNode.h"
 #include "Integer.h"
 #include "Float.h"
 #include "String.h"
@@ -43,7 +43,7 @@ namespace jmb {
 			_bufferH = 480;
 		}
 		
-		Video::Video(string const& name) : Node(name) {
+		Video::Video(string const& name) : FastNode(name) {
 			_type = type;
 			_windowX = _windowY = 0;
 			_windowW = 640;
@@ -53,7 +53,7 @@ namespace jmb {
 			_Init();
 		}
 
-		Video::Video(const Atom* atm) : Node(atm) {
+		Video::Video(const Atom* atm) : FastNode(atm) {
 			assert(0); // this too seems unnecessary
 			Video(atm->identity);
 			isEphemeral = true;
@@ -81,7 +81,7 @@ namespace jmb {
 
 		int Video::Command(string const& cmd) {
 			// TODO:  something meaningful
-			return Node::Command(cmd);
+			return FastNode::Command(cmd);
 		}
 
 		string Video::GetValueAsStdString() {
@@ -96,7 +96,7 @@ namespace jmb {
 			//_windowW--;
 			//ShadowInteger* siWinW = (ShadowInteger*)Dereference("windowWidth");
 			//*Log << "windowWidth deref test:  " << siWinW->GetValueAsStdString() << std::endl;
-			return Node::_Procedure();
+			return FastNode::_Procedure();
 			//return 0;
 		}
 
@@ -112,14 +112,14 @@ namespace jmb {
 
 		void Video::Tick(int time) {
 			// tick the ShadowIntegers
-			/*
 			for(int i=0; i<_childCount; i++) {
 				_children[i]->Tick(time);
 			}
-			*/
+			/*
 			for(AtomMapItr i = _children.begin(); i != _children.end(); i++) {
 				i->second->Tick(time);
 			}
+			*/
 			// observe updates
 			if((_winX_SI)->wasUpdated ||
 			   (_winY_SI)->wasUpdated ||

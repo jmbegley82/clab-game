@@ -11,13 +11,13 @@
 #define MANAGER_H
 
 #include "Atom.h"
-#include "Node.h"
+#include "FastNode.h"
 
 namespace jmb {
 	
 	namespace common {
 	
-		class Manager : public Node {
+		class Manager : public FastNode {
 		public:
 			Manager();
 			Manager(std::string const& name);

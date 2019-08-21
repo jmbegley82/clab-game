@@ -16,7 +16,7 @@
 #include "Log.h"
 #include "StringManip.h"
 #include "Manager.h"
-#include "Node.h"
+#include "FastNode.h"
 #include "Integer.h"
 #include "Float.h"
 #include "String.h"
@@ -38,12 +38,12 @@ namespace jmb {
 			_type = type;
 		}
 		
-		Manager::Manager(string const& name) : Node(name) {
+		Manager::Manager(string const& name) : FastNode(name) {
 			_type = type;
 			_Init();
 		}
 
-		Manager::Manager(const Atom* atm) : Node(atm) {
+		Manager::Manager(const Atom* atm) : FastNode(atm) {
 			assert(0); // this too seems unnecessary
 			Manager(atm->identity);
 			isEphemeral = true;
@@ -51,14 +51,14 @@ namespace jmb {
 			if(t == Manager::type) {
 				// only valid conversion is Manager to (Atom*)Manager
 				Manager* nod = (Manager*)atm;
-				/*
-				for(int i=0; i<MAXOBJS; i++) {
+				for(int i=0; i<_maxChildren; i++) {
 					_children[i] = nod->_children[i];
 				}
-				*/
+				/*
 				for(AtomMapItr i = nod->_children.begin(); i != nod->_children.end(); i++) {
 					_children[i->first] = i->second;
 				}
+				*/
 			}// else assert(t == Manager::type);
 		}
 		
@@ -73,7 +73,7 @@ namespace jmb {
 
 		int Manager::Command(string const& cmd) {
 			// TODO:  something meaningful
-			return Node::Command(cmd);
+			return FastNode::Command(cmd);
 		}
 
 		string Manager::GetValueAsStdString() {
@@ -88,7 +88,7 @@ namespace jmb {
 			//_windowW--;
 			//ShadowInteger* siWinW = (ShadowInteger*)Dereference("windowWidth");
 			//*Log << "windowWidth deref test:  " << siWinW->GetValueAsStdString() << std::endl;
-			return Node::_Procedure();
+			return FastNode::_Procedure();
 			//return 0;
 		}
 
